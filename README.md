@@ -144,10 +144,10 @@ workspace 機能を使うことによって、package-a, package-b のような�
 ```text
 .
 ├── package.json
-└── packages
-    ├── a
+└── workspaces
+    ├── sample
     │   └── package.json
-    └── b
+    └── sample2
         └── package.json
 ```
 
@@ -161,10 +161,10 @@ npm init
 生成された package.json を編集して private フィールド を true にしておきます。
 またワークスペースの定義を作成します。
 
-```package.json
+```json:package.json
 {
   "name": "xxxxx",
-  // ...
+  // 以下を追記する
   "private": true,
   "workspaces": [
     "workspaces\\*"
@@ -176,7 +176,7 @@ npm init
 
 `tsconfig.base.json` を作成します。
 
-```json
+```json:tsconfig.base.json
 {
   "compilerOptions": {
     "target": "ES2018",
@@ -212,7 +212,7 @@ npx tsc --init
 
 作成された tsconfig.json を以下で置き換えます。
 
-```json
+```json:tsconfig.json
 {
   "extends": "./tsconfig.base.json",
   "exclude": [
@@ -253,7 +253,7 @@ mkdir .\src
 
 tsconfig.json を以下で置き換えます。
 
-```json
+```json:tsconfig.json
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
@@ -321,11 +321,11 @@ npm list --depth=0 -g
 
 ## workspace で定義された npm script を実行する
 
-以下のように workspace a に print という npm script を定義したとします。
+以下のように workspace sample に print という npm script を定義したとします。
 
-```json
+```json:package.json
 {
-  "name": "a",
+  "name": "sample",
   "version": "1.0.0",
   // ...
   "scripts": {
