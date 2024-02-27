@@ -55,7 +55,7 @@ npm run cdk:diff:all --env=<環境識別子> --project=<プロジェクト名>
 # 全てデプロイ
 npm run cdk:deploy:all --env=<環境識別子> --project=<プロジェクト名>
 # 特定のスタックのみデプロイ
-npm run cdk:deploy:e --env=<環境識別子> --project=<プロジェクト名> --s=<スタック名>
+npm run cdk:deploy --env=<環境識別子> --project=<プロジェクト名> --s=<スタック名>
 ```
 
 ![cdk_diff](/images/cdk_diff.JPG)
