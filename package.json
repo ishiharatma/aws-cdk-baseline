@@ -1,0 +1,29 @@
+{
+  "name": "aws-cdk-baseline",
+  "version": "1.0.0",
+  "description": "This is a cdk-sample project for TypeScript development with CDK.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ishiharatma/aws-cdk-baseline.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ishiharatma/aws-cdk-baseline/issues"
+  },
+  "homepage": "https://github.com/ishiharatma/aws-cdk-baseline#readme",
+  "private": true,
+  "workspaces": [
+    "workspaces\\*"
+  ],
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}
