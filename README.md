@@ -43,7 +43,6 @@ The `cdk.json` file tells the CDK Toolkit how to execute.
 e.g.,
 
 ```sh
-
 cdk diff <スタック名> -c env=<環境識別子> -c project=<プロジェクト名> --profile <projectname>-<環境識別子> --version-reporting false --path-metadata false --asset-metadata false
 ```
 
@@ -51,11 +50,13 @@ npm run では次のように実行します。
 
 ```sh
 # 差分チェック
-npm run cdk:diff:all --env=<環境識別子> --project=<プロジェクト名>
+npm run cdk:diff:all -w workspaces\sample --project=<プロジェクト名> --env=<環境識別子> 
 # 全てデプロイ
-npm run cdk:deploy:all --env=<環境識別子> --project=<プロジェクト名>
+npm run cdk:deploy:all -w workspaces\sample --project=<プロジェクト名> --env=<環境識別子> 
 # 特定のスタックのみデプロイ
-npm run cdk:deploy --env=<環境識別子> --project=<プロジェクト名> --s=<スタック名>
+npm run cdk:deploy -w workspaces\sample --project=<プロジェクト名> --env=<環境識別子>  --s=<スタック名>
+# テスト
+npm run test -w workspaces\sample
 ```
 
 ![cdk_diff](/images/cdk_diff.JPG)
@@ -346,7 +347,6 @@ npm run print -w workspaces/sample
 npm update
 ```
 
-
 ## CDK 初期化
 
 (初回のみ、アカウント初期化をCDKで実施している場合は不要)
@@ -354,7 +354,7 @@ npm update
 1. 次のコマンドを実行します。CloudFormation スタック「CDKToolkit」が作成されます。作成されたことを確認したら、削除保護を確認します。無効になっていたら有効にておきます。（--termination-protectionのオプションで有効になっているはずです。）
 
 ```sh
-npm run cdk:bootstrap --env=<環境識別子> --project=<プロジェクト名> -w workspaces/sample
+npm run cdk:bootstrap -w workspaces/sample --project=<プロジェクト名> --env=<環境識別子>
 ```
 
 ## トラブルシューティング
