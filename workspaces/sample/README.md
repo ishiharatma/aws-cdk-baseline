@@ -16,8 +16,8 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 ## Usage
 
 ```sh
-npm run cdk:diff:all --project=<プロジェクト名> --env=<環境識別子>
-npm run cdk:diff --project=<プロジェクト名> --env=<環境識別子> --s=<スタック名>
-npm run cdk:deploy:all --project=<プロジェクト名> --env=<環境識別子>
+npm run cdk:diff:all --project=<プロジェクト名> --env=<環境識別子> --list="one,two,three"
+npm run cdk:diff --project=<プロジェクト名> --env=<環境識別子> --list="one,two,three" --s=<スタック名>
+npm run cdk:deploy:all --project=<プロジェクト名> --env=<環境識別子> --list="one,two,three"
 npm run cdk:deploy --project=<プロジェクト名> --env=<環境識別子> --s=<スタック名>
 ```

@@ -1,16 +1,25 @@
 import * as cdk from 'aws-cdk-lib';
+import { StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
+export interface myStackProps extends StackProps {
+  // Define any properties required for your stack here
+  readonly pjName: string;
+  readonly envName: string;
+  readonly list?: string[];
+  readonly isAutoDeleteObject?: boolean;
+}
 export class SampleStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: myStackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    console.log(`${props.pjName} ${props.envName}`);
+    const arr = props.list ?? [];
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'SampleQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    arr.forEach(element => {
+      console.log(element);
+    });
+
   }
 }

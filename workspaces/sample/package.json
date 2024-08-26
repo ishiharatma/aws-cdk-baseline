@@ -16,7 +16,8 @@
     "cdk:deploy:all": "cdk deploy --all --version-reporting false --path-metadata false --asset-metadata false -c env=%npm_config_env% -c project=%npm_config_project% --profile %npm_config_project%-%npm_config_env%",
     "cdk:deploy": "cdk deploy --version-reporting false --path-metadata false --asset-metadata false -c env=%npm_config_env% -c project=%npm_config_project% --profile %npm_config_project%-%npm_config_env% -e %npm_config_s%",
     "cdk:destroy:all": "cdk destroy --all --version-reporting false --path-metadata false --asset-metadata false -c env=%npm_config_env% -c project=%npm_config_project% --profile %npm_config_project%-%npm_config_env%",
-    "cdk:destroy": "cdk destroy --version-reporting false --path-metadata false --asset-metadata false -c env=%npm_config_env% --profile %npm_config_project%-%npm_config_env% -e %npm_config_s%"
+    "cdk:destroy": "cdk destroy --version-reporting false --path-metadata false --asset-metadata false -c env=%npm_config_env% --profile %npm_config_project%-%npm_config_env% -e %npm_config_s%",
+    "cdk:synth:test": "cdk synth --version-reporting false --path-metadata false --asset-metadata false -c env=%npm_config_env% -c project=%npm_config_project% --profile %npm_config_project%-%npm_config_env% -c list=%npm_config_list%"
   },
   "devDependencies": {
     "@types/jest": "^29.5.11",
