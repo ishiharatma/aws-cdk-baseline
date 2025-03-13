@@ -1,0 +1,47 @@
+{
+  "name": "AWS CDK Development Container",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "mounts": [
+		{
+			"source": "${localEnv:USERNAME}/.aws",
+			"target": "/home/node/.aws",
+			"type": "bind"
+		}
+  ],
+  "features": {
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    "ghcr.io/devcontainers-contrib/features/aws-cdk:2": {},
+    "ghcr.io/eitsupi/devcontainer-features/jq-likes:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "charliermarsh.ruff",
+        "ms-azuretools.vscode-docker",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "amazonwebservices.amazon-q-vscode",
+        "amazonwebservices.aws-toolkit-vscode",
+        "ms-vscode-remote.remote-containers",
+        "hediet.vscode-drawio",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "taichi.vscode-textlint",
+        "donjayamanne.githistory",
+        "eamodio.gitlens",
+        "mechatroner.rainbow-csv",
+        "yzhang.markdown-all-in-one",
+        "ms-ceintl.vscode-language-pack-ja"
+      ],
+      "settings": {
+          "terminal.integrated.defaultProfile.linux": "/bin/bash",
+          "typescript.tsdk": "/usr/local/lib/node_modules/typescript/lib"
+      }
+    }
+  },
+  "postCreateCommand": "pip install awscli-local git-remote-codecommit; npm install -g aws-cdk-local",
+  "remoteUser": "node"
+}
