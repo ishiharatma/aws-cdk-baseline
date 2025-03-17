@@ -31,10 +31,18 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 RUN unzip awscliv2.zip
 RUN ./aws/install
 
-# Create and configure dev user
-RUN useradd -m -s /bin/bash -G sudo dev \
-    && echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/dev \
-    && chown -R dev:dev /home/dev
+## Create dev user with sudo access
+#RUN useradd -m -s /bin/bash -G sudo dev \
+#    && echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/dev
+#
+#RUN mkdir -p /workspaces && chown -R dev:dev /workspaces
+#
+#USER dev
+#WORKDIR /home/node
 
-USER dev
-WORKDIR /home/dev
+# nodeユーザーにsudo権限を付与
+RUN echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/node
+
+# ユーザーをnodeに設定
+USER node
+WORKDIR /home/node
