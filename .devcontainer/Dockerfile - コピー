@@ -33,9 +33,9 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 RUN unzip awscliv2.zip
 RUN ./aws/install
 
-# Grant sudo privileges to the node user
+# nodeユーザーにsudo権限を付与
 RUN echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/node
 
-# Set user to node
+# ユーザーをnodeに設定
 USER node
 WORKDIR /home/node

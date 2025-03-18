@@ -13,7 +13,7 @@
     "cdk:diff": "cdk diff --version-reporting false --path-metadata false --asset-metadata false -c env=%npm_config_env% -c project=%npm_config_project% --profile %npm_config_project%-%npm_config_env% -e %npm_config_s%",
     "cdk:deploy": "cdk deploy --version-reporting false --path-metadata false --asset-metadata false -c env=%npm_config_env% -c project=%npm_config_project% --profile %npm_config_project%-%npm_config_env% -e %npm_config_s%",
     "cdk:destroy": "cdk destroy --version-reporting false --path-metadata false --asset-metadata false -c env=%npm_config_env% --profile %npm_config_project%-%npm_config_env% -e %npm_config_s%",
-    "cdk:synth:test": "cdk synth --version-reporting false --path-metadata false --asset-metadata false -c env=%npm_config_env% -c project=%npm_config_project% --profile %npm_config_project%-%npm_config_env% -c list=%npm_config_list%"
+    "cdk:synth:test": "cdk synth --version-reporting false --path-metadata false --asset-metadata false -c env=%npm_config_env% -c project=%npm_config_project% --profile %npm_config_project%-%npm_config_env% -c list=%npm_config_list%",
     "win:cdk:bootstrap": "cdk bootstrap --termination-protection true -c env=%npm_config_env% -c project=%npm_config_project% --profile %npm_config_project%-%npm_config_env%",
     "win:cdk:synth": "cdk synth --version-reporting false --path-metadata false --asset-metadata false -c project=%npm_config_project% -c env=%npm_config_env% --profile %npm_config_project%-%npm_config_env%",
     "win:cdk:diff:all": "cdk diff --all --version-reporting false --path-metadata false --asset-metadata false -c project=%npm_config_project% -c env=%npm_config_env% --profile %npm_config_project%-%npm_config_env%",
@@ -28,14 +28,15 @@
   "devDependencies": {
     "@types/jest": "^29.5.11",
     "@types/node": "20.10.4",
-    "aws-cdk": "2.118.0",
+    "aws-cdk": "^2.1000.0",
+    "cdk-nag": "^2.35.47",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.2",
     "typescript": "~5.3.3"
   },
   "dependencies": {
-    "aws-cdk-lib": "^2.118.0",
+    "aws-cdk-lib": "^2.180.0",
     "constructs": "^10.3.0",
     "source-map-support": "^0.5.21"
   }

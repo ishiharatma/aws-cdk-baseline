@@ -43,8 +43,6 @@ npm update aws-cdk
 npm update aws-cdk-lib
 ```
 
-
-
 ## トラブルシューティング
 
 - Unable to parse config file: AWS
