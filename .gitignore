@@ -103,3 +103,6 @@ typings/
 .yarn-integrity
 .env
 .next
+
+
+.aws/
