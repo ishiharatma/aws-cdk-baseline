@@ -9,6 +9,7 @@ FROM mcr.microsoft.com/devcontainers/typescript-node:22
 #RUN npm config set cafile /etc/ssl/certs/ca-certificates.crt \
 #    && npm config set registry http://registry.npmjs.org/ \
 #    && npm config set strict-ssl false
+#export AWS_CA_BUNDLE=/usr/local/share/ca-certificates/your-root-ca.crt
 
 # Install additional packages required for AWS CDK
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
