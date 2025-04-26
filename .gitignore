@@ -104,5 +104,6 @@ typings/
 .env
 .next
 
-
 .aws/
+# シンボリックリンク
+.aws
