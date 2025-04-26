@@ -14,8 +14,10 @@ FROM mcr.microsoft.com/devcontainers/typescript-node:1-22-bullseye
 # Install additional packages required for AWS CDK
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \
+    # uvでインストール
     python3 \
     python3-pip \
+    python3-venv \
     jq \
     #git \
     curl \
@@ -52,7 +54,10 @@ RUN echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/node
 USER node
 WORKDIR /home/node
 
-# uv�̃C���X�g�[��
+# uvのインストール
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-# PATH��.local/bin��ǉ�
+# PATHに.local/binを追加
 ENV PATH="/home/node/.local/bin:${PATH}"
+
+# Pythonのインストール
+RUN uv python install 3.13
