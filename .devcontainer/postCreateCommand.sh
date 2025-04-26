@@ -10,24 +10,6 @@ set -e
 # Dockerソケットの権限を調整
 #sudo chmod 666 /var/run/docker.sock
 
-### AWS Session Manager Pluginのインストール
-##cpu=""
-##if [ $(uname -m) == "x86_64" ]; then
-##  # ubuntu
-##  cpu=ubuntu_64bit
-##elif [ $(uname -m) == "aarch64" ]; then
-##  # M1 macOS
-##  cpu=ubuntu_arm64
-##fi
-##
-##if [ cpu != "" ]; then
-##curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/$cpu/session-manager-plugin.deb" \
-##  -o session-manager-plugin.deb \
-##  && sudo dpkg -i session-manager-plugin.deb && rm -rf ./session-manager-plugin.deb
-##else
-##  echo "Unknown os"
-##fi
-
 git config --global core.autocrlf false
 git config --global core.filemode false
 
