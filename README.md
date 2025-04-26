@@ -274,13 +274,16 @@ tsconfig.json を以下で置き換えます。
 eslint のような lint ツールは開発用の依存パッケージなので単純にルート側で npm install を行います。
 
 ```sh
-npm install --save-dev eslint
+npm install --save-dev eslint eslint-cdk-plugin eslint-config-prettier eslint-plugin-prettier eslint-plugin-unused-imports @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
 workspace のコードが依存するパッケージは、次のように -w をつけて ルート側 で npm install を実行して追加します。
 
+https://www.npmjs.com/
+
 ```sh
-npm install -w workspaces/sample --save aws-cdk-lib constructs
+npm install -w workspaces/sample aws-cdk-lib constructs change-case-commonjs
+npm install -w workspaces/sample --save-dev cdk-nag cross-env
 ```
 
 こうすることにより、workspace が依存するパッケージもルートの package-lock.json によって管理されるようになります。
