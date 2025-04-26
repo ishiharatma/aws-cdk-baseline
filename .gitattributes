@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-* text=auto eol=lf
-*.{cmd,[cC][mM][dD]} text eol=crlf
-*.{bat,[bB][aA][tT]} text eol=crlf
-=======
 * text=auto t eol=lf
 *.{cmd,[cC][mM][dD]} text eol=crlf
 *.{bat,[bB][aA][tT]} text eol=crlf
 *.ps1 text eol=crlf
 *.sh text eol=lf
->>>>>>> 8635fc746a857df8f941e34292e677d2f1dd9b1c
