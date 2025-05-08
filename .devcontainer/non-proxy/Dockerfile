@@ -1,20 +1,8 @@
 FROM mcr.microsoft.com/devcontainers/typescript-node:1-22-bullseye
 
-# Optional: Copy and update certificates for corporate proxy environments
-## Copy and update certificates
-#COPY .devcontainer/your-root-ca.cer /usr/local/share/ca-certificates/your-root-ca.crt
-##RUN update-ca-certificates
-## Configure npm certificate location and SSL settings
-#RUN npm config set cafile /etc/ssl/certs/ca-certificates.crt \
-#    && npm config set registry http://registry.npmjs.org/ \
-#    && npm config set strict-ssl false
-# Set AWS_CA_BUNDLE environment variable to the location of the CA bundle
-#ENV AWS_CA_BUNDLE /usr/local/share/ca-certificates/your-root-ca.crt
-
 # Install additional packages required for AWS CDK
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \
-    # uvでインストール
     python3 \
     python3-pip \
     python3-venv \
@@ -22,6 +10,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     #git \
     curl \
     unzip \
+    graphviz \
     #docker.io \
     #docker-compose \
     #docker-compose-plugin \
@@ -54,10 +43,10 @@ RUN echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/node
 USER node
 WORKDIR /home/node
 
-# uvのインストール
+# install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-# PATHに.local/binを追加
+# add .local/bin to PATH
 ENV PATH="/home/node/.local/bin:${PATH}"
 
-# Pythonのインストール
+# Install Python 3.13
 RUN uv python install 3.13
