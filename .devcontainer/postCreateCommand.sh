@@ -99,17 +99,59 @@ echo "-----------------------------------"
 echo "checking versions..."
 echo "-----------------------------------"
 
-echo "node version: $(node -v)"
-echo "npm version: $(npm -v)"
+# Nodeの設定確認
+if command -v aws &> /dev/null; then
+    echo "✅ Node is available"
+    echo "node version: $(node -v)"
+else
+    echo "❌ Node not found"
+fi
+# npmの設定確認
+if command -v aws &> /dev/null; then
+    echo "✅ npm is available"
+    echo "npm version: $(npm -v)"
+else
+    echo "❌ npm not found"
+fi
+# AWS CLIの設定確認
+if command -v aws &> /dev/null; then
+    echo "✅ AWS CLI is available"
+    echo "AWS CLI version: $(aws --version)"
+    echo "aws session manager plugin version: $(session-manager-plugin --version)"
+else
+    echo "❌ AWS CLI not found"
+fi
 
-echo "aws cli version: $(aws --version)"
-echo "aws session manager plugin version: $(session-manager-plugin --version)"
-echo "aws cdk version: $(cdk --version)"
+# AWS CDKの設定確認
+if command -v cdk &> /dev/null; then
+    echo "✅ AWS CDK is available"
+    echo "AWS CDK version: $(cdk --version)"
+else
+    echo "❌ AWS CDK not found"
+fi
 
-echo "git version: $(git --version)"
+# Gitの設定確認
+if command -v git &> /dev/null; then
+    echo "✅ Git is available"
+    echo "git version: $(git --version)"
+else
+    echo "❌ Git not found"
+fi
 
-echo "uv version: $(uv --version)"
-echo "uvx version: $(uvx --version)"
+# uvの設定確認
+if command -v git &> /dev/null; then
+    echo "✅ uv is available"
+    echo "uv version: $(uv --version)"
+else
+    echo "❌ uv not found"
+fi
+# uvxの設定確認
+if command -v git &> /dev/null; then
+    echo "✅ uvx is available"
+    echo "uvx version: $(uvx --version)"
+else
+    echo "❌ uvx not found"
+fi
 
 echo "-----------------------------------"
 echo "checking aws configuration..."
