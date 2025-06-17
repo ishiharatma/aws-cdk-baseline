@@ -24,7 +24,7 @@ echo 'alias awsid="aws sts get-caller-identity"' >> ~/.bashrc
 echo 'alias npmfl="npm run format && npm run lint:fix"' >> ~/.bashrc
 
 # CDK関連のエイリアス
-echo 'alias cdksynth="npm run cdk synth \"Dev/*\""' >> ~/.bashrc
+echo 'alias cdksynth="npm run cdk synth"' >> ~/.bashrc
 
 # その他のエイリアス
 echo '
@@ -78,7 +78,7 @@ tips() {
   echo "NPM関連："
   echo "  「npmfl」: linter および formatter の実行（npm run format && npm run lint:fix）"
   echo "CDK関連："
-  echo "  「cdksynth」: CloudFormation テンプレートの生成（npm run cdk synth \"Dev/*\"）"
+  echo "  「cdksynth」: CloudFormation テンプレートの生成（npm run cdk synth）"
   echo ""
   echo "その他："
   echo "  「tips」: このヘルプメッセージを表示"
@@ -95,21 +95,78 @@ tips() {
 #source ~/.bashrc 2>/dev/null || source ~/.zshrc 2>/dev/null
 source ~/.bashrc 2>/dev/null
 
+echo "=== Post-create setup starting ==="
+
 echo "-----------------------------------"
 echo "checking versions..."
 echo "-----------------------------------"
+if command -v node &> /dev/null; then
+    echo "✅ Node is available"
+    echo "node version: $(node -v)"
+else
+    echo "❌ Node not found"
+fi
+if command -v npm &> /dev/null; then
+    echo "✅ NPM is available"
+    echo "npm version: $(npm -v)"
+else
+    echo "❌ NPM not found"
+fi
 
-echo "node version: $(node -v)"
-echo "npm version: $(npm -v)"
+# Amazon Q CLIの設定確認
+if command -v q &> /dev/null; then
+    echo "✅ Amazon Q CLI is available"
+    echo "Amazon Q CLI version:"
+    q --version || echo "Version check failed but CLI is installed"
+else
+    echo "❌ Amazon Q CLI not found"
+fi
 
-echo "aws cli version: $(aws --version)"
-echo "aws session manager plugin version: $(session-manager-plugin --version)"
-echo "aws cdk version: $(cdk --version)"
+# AWS CLIの設定確認
+if command -v aws &> /dev/null; then
+    echo "✅ AWS CLI is available"
+    echo "AWS CLI version: $(aws --version)"
+    echo "aws session manager plugin version: $(session-manager-plugin --version)"
+else
+    echo "❌ AWS CLI not found"
+fi
+# Pythonの設定確認
+if command -v python3 &> /dev/null; then
+    echo "✅ Python3 is available"
+    echo "Python version:"
+    python3 --version
+else
+    echo "❌ Python3 not found"
+fi
 
-echo "git version: $(git --version)"
+# AWS CDKの設定確認
+if command -v cdk &> /dev/null; then
+    echo "✅ AWS CDK is available"
+    echo "AWS CDK version: $(cdk --version)"
+else
+    echo "❌ AWS CDK not found"
+fi
+# Gitの設定確認
+if command -v git &> /dev/null; then
+    echo "✅ Git is available"
+    echo "Git version: $(git --version)"
+else
+    echo "❌ Git not found"
+fi
 
-echo "uv version: $(uv --version)"
-echo "uvx version: $(uvx --version)"
+# UV, UVXの設定確認
+if command -v uv &> /dev/null; then
+    echo "✅ UV is available"
+    echo "UV version: $(uv --version)"
+else
+    echo "❌ UV not found"
+fi
+if command -v uvx &> /dev/null; then
+    echo "✅ UVX is available"
+    echo "UVX version: $(uvx --version)"
+else
+    echo "❌ UVX not found"
+fi
 
 echo "-----------------------------------"
 echo "checking aws configuration..."

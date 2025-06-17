@@ -21,6 +21,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     jq \
     #git \
     curl \
+    wget \
     unzip \
     graphviz \
     #docker.io \
@@ -28,6 +29,10 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     #docker-compose-plugin \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Install AWS CLI v2
+RUN npm install -g typescript \
+    && npm install -g aws-cdk
 
 # Install AWS Session Manager Plugin
 RUN export CPU="" && \
@@ -47,6 +52,11 @@ RUN export CPU="" && \
     else \
     echo "Unknown architecture for AWS Session Manager Plugin installation"; \
     fi
+
+# install Amazom Q CLI
+RUN wget https://desktop-release.q.us-east-1.amazonaws.com/latest/amazon-q.deb \
+    && apt-get install -f \
+    && dpkg -i amazon-q.deb
 
 # Grant sudo privileges to the node user
 RUN echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/node
