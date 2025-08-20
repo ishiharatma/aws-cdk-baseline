@@ -86,6 +86,7 @@ awsidp() {
 # Amazon Q CLIのエイリアス
 echo 'alias ql="q login"' >> ~/.bashrc
 echo 'alias qd="q doctor"' >> ~/.bashrc
+echo 'alias qc="q chat"' >> ~/.zshrc
 
 # その他のエイリアス
 # エイリアスのTipsを表示する関数
@@ -106,6 +107,7 @@ tips() {
   echo "Amazon Q CLI関連："
   echo "  「ql」: Amazon Q CLIにログイン(q login)"
   echo "  「qd」: Amazon Q CLIの診断(q doctor)"
+  echo "  「qc」: Amazon Q CLIのチャット(q chat)"
   echo ""
   echo "NPM関連："
   echo "  「npmfl」: linter および formatter の実行（npm run format && npm run lint:fix）"
