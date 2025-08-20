@@ -50,7 +50,7 @@ USER node
 WORKDIR /home/node
 
 # install Amazon Q CLI as node user
-RUN export OS=$(uname -m); \
+RUN export OS=$(uname -m) && \
     if [ -n "$OS" ]; then \
     curl --proto '=https' --tlsv1.2 -sSf "https://desktop-release.q.us-east-1.amazonaws.com/latest/q-${OS}-linux-musl.zip" -o "/tmp/q.zip" && \
     cd /tmp && \
