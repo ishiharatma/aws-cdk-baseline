@@ -13,12 +13,6 @@ set -e
 git config --global core.autocrlf false
 git config --global core.filemode false
 
-# AWS SSOログインとget-caller-identityのエイリアス設定
-# 基本コマンド（デフォルトプロファイル用）
-echo 'alias awslogin="aws sso login && echo \"現在の認証情報:\" && aws sts get-caller-identity"' >> ~/.bashrc
-#echo 'alias awslogin="aws sso login && echo \"現在の認証情報:\" && aws sts get-caller-identity"' >> ~/.zshrc
-echo 'alias awsid="aws sts get-caller-identity"' >> ~/.bashrc
-#echo 'alias awsid="aws sts get-caller-identity"' >> ~/.zshrc
 
 # NPM関連のエイリアス
 echo 'alias npmfl="npm run format && npm run lint:fix"' >> ~/.bashrc
@@ -26,9 +20,33 @@ echo 'alias npmfl="npm run format && npm run lint:fix"' >> ~/.bashrc
 # CDK関連のエイリアス
 echo 'alias cdksynth="npm run cdk synth"' >> ~/.bashrc
 
-# その他のエイリアス
+# AWS関連のエイリアス
+# AWS SSOログインとget-caller-identityのエイリアス設定
+# 基本コマンド（デフォルトプロファイル用）
+echo 'alias awslogin="aws sso login && echo \"現在の認証情報:\" && aws sts get-caller-identity"' >> ~/.bashrc
+#echo 'alias awslogin="aws sso login && echo \"現在の認証情報:\" && aws sts get-caller-identity"' >> ~/.zshrc
+echo 'alias awsid="aws sts get-caller-identity"' >> ~/.bashrc
+#echo 'alias awsid="aws sts get-caller-identity"' >> ~/.zshrc
+# プロファイル一覧を表示するエイリアス
+echo 'alias awslist="aws configure list-profiles"' >> ~/.bashrc
+# デフォルトとなるプロファイルを切り替えるエイリアス
 echo '
+awsswp() {
+  if [ -z "$1" ]; then
+    echo "使用法: awsswp <プロファイル名>"
+    return 1
+  fi
+  export AWS_DEFAULT_PROFILE="$1" && aws configure list || echo ""
+  echo "デフォルトプロファイルを $1 に設定しました"
+}
+awsswback() {
+  export AWS_DEFAULT_PROFILE=default && aws configure list || echo ""
+  echo "プロファイルをデフォルトに戻しました"
+}
+' >> ~/.bashrc
+
 # プロファイル指定可能なAWS SSOログイン関数
+echo '
 awsloginp() {
   if [ -z "$1" ]; then
     echo "使用法: awsloginp <プロファイル名>"
@@ -63,17 +81,31 @@ awsidp() {
   fi
   aws sts get-caller-identity --profile "$1"
 }
+' >> ~/.bashrc
 
+# Amazon Q CLIのエイリアス
+echo 'alias ql="q login"' >> ~/.bashrc
+echo 'alias qd="q doctor"' >> ~/.bashrc
+
+# その他のエイリアス
 # エイリアスのTipsを表示する関数
+echo '
 tips() {
   echo "-----------------------------------"
   echo "便利なコマンドTips"
   echo "-----------------------------------"
   echo "AWS関連："
+  echo "  「awslist」: プロファイル一覧を表示"
+  echo "  「awsswp <プロファイル名>」: デフォルトプロファイルを切り替え"
+  echo "  「awsswback」: デフォルトプロファイルに戻す"
   echo "  「awslogin」: AWS SSOログイン + 現在の認証情報確認（デフォルトプロファイル）"
   echo "  「awsid」: 認証情報確認のみ（デフォルトプロファイル）"
   echo "  「awsloginp <プロファイル名>」: 指定プロファイルでAWS SSOログイン + 認証情報確認"
   echo "  「awsidp <プロファイル名>」: 指定プロファイルで認証情報確認のみ"
+  echo ""
+  echo "Amazon Q CLI関連："
+  echo "  「ql」: Amazon Q CLIにログイン(q login)"
+  echo "  「qd」: Amazon Q CLIの診断(q doctor)"
   echo ""
   echo "NPM関連："
   echo "  「npmfl」: linter および formatter の実行（npm run format && npm run lint:fix）"
@@ -118,6 +150,7 @@ if command -v q &> /dev/null; then
     echo "✅ Amazon Q CLI is available"
     echo "Amazon Q CLI version:"
     q --version || echo "Version check failed but CLI is installed"
+    q doctor
 else
     echo "❌ Amazon Q CLI not found"
 fi
