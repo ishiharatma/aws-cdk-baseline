@@ -59,11 +59,25 @@ RUN wget https://desktop-release.q.us-east-1.amazonaws.com/latest/amazon-q.deb \
     && dpkg -i amazon-q.deb
 
 # Grant sudo privileges to the node user
-RUN echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/node
+RUN echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/node && \
+    chmod 0440 /etc/sudoers.d/node
 
 # Set user to node
 USER node
 WORKDIR /home/node
+
+# install Amazon Q CLI as node user
+RUN export OS=$(uname -m) && \
+    if [ -n "$OS" ]; then \
+    curl --proto '=https' --tlsv1.2 -sSf "https://desktop-release.q.us-east-1.amazonaws.com/latest/q-${OS}-linux-musl.zip" -o "/tmp/q.zip" && \
+    cd /tmp && \
+    unzip q.zip && \
+    cd q && \
+    ./install.sh --no-confirm&& \
+    cd / && \
+    sudo rm -rf /tmp/q && \
+    sudo rm -f /tmp/q.zip; \
+    fi
 
 # Set git config for node user
 RUN npm config set cafile /etc/ssl/certs/ca-certificates.crt \

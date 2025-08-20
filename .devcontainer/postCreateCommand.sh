@@ -152,7 +152,6 @@ if command -v q &> /dev/null; then
     echo "✅ Amazon Q CLI is available"
     echo "Amazon Q CLI version:"
     q --version || echo "Version check failed but CLI is installed"
-    q doctor
 else
     echo "❌ Amazon Q CLI not found"
 fi

@@ -59,8 +59,7 @@ RUN export OS=$(uname -m) && \
     ./install.sh --no-confirm&& \
     cd / && \
     sudo rm -rf /tmp/q && \
-    sudo rm -f /tmp/q.zip &&\
-    q doctor \
+    sudo rm -f /tmp/q.zip; \
     fi
 
 # install uv
