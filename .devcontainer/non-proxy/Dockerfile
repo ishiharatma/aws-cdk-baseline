@@ -18,9 +18,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Install AWS CLI v2
-RUN npm install -g typescript \
-    && npm install -g aws-cdk
+# install AWS CDK and TypeScript
+RUN npm install -g aws-cdk aws-cdk-local typescript
 
 # Install AWS Session Manager Plugin
 RUN export CPU="" && \
@@ -69,3 +68,20 @@ ENV PATH="/home/node/.local/bin:${PATH}"
 
 # Install Python 3.13
 RUN uv python install 3.13
+
+# LocalStack CLI
+RUN pip3 install --user awscli-local --break-system-packages
+
+ARG LOCALSTACK_VERSION="4.9.1"
+RUN export FILE="" && \
+    if [ $(uname -m) = "x86_64" ]; then \
+        export FILE="localstack-cli-${LOCALSTACK_VERSION}-linux-amd64-onefile.tar.gz"; \
+    elif [ $(uname -m) = "aarch64" ]; then \
+        export FILE="localstack-cli-${LOCALSTACK_VERSION}-linux-arm64-onefile.tar.gz"; \
+    fi && \
+    if [ -n "$FILE" ]; then \
+        echo "v${LOCALSTACK_VERSION}/Downloading ${FILE}" && \
+        curl --output "${FILE}" --location "https://github.com/localstack/localstack-cli/releases/download/v${LOCALSTACK_VERSION}/${FILE}" && \
+        sudo tar xvzf "${FILE}" -C /usr/local/bin && \
+        rm "${FILE}"; \
+    fi
